@@ -468,9 +468,9 @@ public class ReactEditText extends AppCompatEditText {
   }
 
   public void maybeSetTextFromJS(ReactTextUpdate reactTextUpdate) {
-    mIsSettingTextFromJS = true;
-    maybeSetText(reactTextUpdate);
-    mIsSettingTextFromJS = false;
+    // mIsSettingTextFromJS = true;
+    // maybeSetText(reactTextUpdate);
+    // mIsSettingTextFromJS = false;
   }
 
   public void maybeSetTextFromState(ReactTextUpdate reactTextUpdate) {
@@ -502,10 +502,10 @@ public class ReactEditText extends AppCompatEditText {
     // current text need to be adapted to the new text. Since TextView#setText() will remove or
     // reset some of these spans even if they are set directly, SpannableStringBuilder#replace() is
     // used instead (this is also used by the keyboard implementation underneath the covers).
-    SpannableStringBuilder spannableStringBuilder =
-        new SpannableStringBuilder(reactTextUpdate.getText());
-    manageSpans(spannableStringBuilder);
-    mContainsImages = reactTextUpdate.containsImages();
+    // SpannableStringBuilder spannableStringBuilder =
+    //     new SpannableStringBuilder(reactTextUpdate.getText());
+    // manageSpans(spannableStringBuilder);
+    // mContainsImages = reactTextUpdate.containsImages();
 
     // When we update text, we trigger onChangeText code that will
     // try to update state if the wrapper is available. Temporarily disable
@@ -517,10 +517,12 @@ public class ReactEditText extends AppCompatEditText {
     if (reactTextUpdate.getText().length() == 0) {
       setText(null);
     } else {
+      String updatedText = reactTextUpdate.getText().toString();
+      setText(updatedText);
       // When we update text, we trigger onChangeText code that will
       // try to update state if the wrapper is available. Temporarily disable
       // to prevent an infinite loop.
-      getText().replace(0, length(), spannableStringBuilder);
+      //getText().replace(0, length(), spannableStringBuilder);
     }
     mDisableTextDiffing = false;
 
