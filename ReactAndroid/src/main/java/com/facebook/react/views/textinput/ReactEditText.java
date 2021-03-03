@@ -414,18 +414,19 @@ public class ReactEditText extends EditText {
     // current text need to be adapted to the new text. Since TextView#setText() will remove or
     // reset some of these spans even if they are set directly, SpannableStringBuilder#replace() is
     // used instead (this is also used by the the keyboard implementation underneath the covers).
-    SpannableStringBuilder spannableStringBuilder =
-        new SpannableStringBuilder(reactTextUpdate.getText());
-    manageSpans(spannableStringBuilder);
-    mContainsImages = reactTextUpdate.containsImages();
-    mIsSettingTextFromJS = true;
+    // SpannableStringBuilder spannableStringBuilder =
+    //     new SpannableStringBuilder(reactTextUpdate.getText());
+    // manageSpans(spannableStringBuilder);
+    // mContainsImages = reactTextUpdate.containsImages();
+    // mIsSettingTextFromJS = true;
 
     // On some devices, when the text is cleared, buggy keyboards will not clear the composing
     // text so, we have to set text to null, which will clear the currently composing text.
     if (reactTextUpdate.getText().length() == 0) {
       setText(null);
     } else {
-      getText().replace(0, length(), spannableStringBuilder);
+      String updatedText = reactTextUpdate.getText().toString();
+      getText().replace(0, length(), updatedText);
     }
 
     mIsSettingTextFromJS = false;
