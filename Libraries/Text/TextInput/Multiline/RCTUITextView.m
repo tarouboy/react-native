@@ -181,6 +181,7 @@ static UIColor *defaultPlaceholderColor()
 {
   if (@available(iOS 14, *)) {
       // iOS 14 (or newer)
+    [super setContentOffset:contentOffset animated:YES];
   } else {
     // Turning off scroll animation.
     // This fixes the problem also known as "flaky scrolling".
