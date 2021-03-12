@@ -179,9 +179,13 @@ static UIColor *defaultPlaceholderColor()
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(__unused BOOL)animated
 {
-  // Turning off scroll animation.
-  // This fixes the problem also known as "flaky scrolling".
-  [super setContentOffset:contentOffset animated:NO];
+  if (@available(iOS 14, *)) {
+      // iOS 14 (or newer)
+  } else {
+    // Turning off scroll animation.
+    // This fixes the problem also known as "flaky scrolling".
+    [super setContentOffset:contentOffset animated:NO];
+  }
 }
 
 - (void)selectAll:(id)sender
